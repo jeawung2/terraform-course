@@ -3,8 +3,13 @@
 * Orignal Source form : [https://github.com/wardviaene/terraform-course](https://github.com/wardviaene/terraform-course) for  [Udemy course about Terraform](https://www.udemy.com/learn-devops-infrastructure-automation-with-terraform/?couponCode=TERRAFORM_GIT)
 * Update by Steve J.South [NamJungGu] <nowage@gmail.com>
 
-# Todo
-* Notes...
+# Usage
+```
+cd
+git clone https://github.com/Finfra/terraform-coursehttps://github.com/Finfra/terraform-course
+cd terraform-course/01-FirstSteps
+cat README.md
+```
 
 # Demo overview
 Demo Directory                                  | Description
@@ -43,7 +48,7 @@ c6-docker_EcrEcsWithJenkinsInACompleteWorkflow  | Using ECR/ECS with Jenkins in 
 c7-module2                                      | Using ECS + ALB in 4 modules to show how developing terraform modules work
 
 # Setting for Convenient
-* Root계정에서 실행하세요. 
+* Root계정에서 실행하세요.
 ```
 ## ssh
 echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
