@@ -49,8 +49,9 @@ exit
 ```
 
 5. destroy
+* AWS Console→EC2에서 해당 instnace 삭제후 실행
+  - Volume을 수동으로 연동해서 Volume삭제 안되서 instance도 삭제 안되고, 해당 인스턴스를 사용하고 있는 VPC도 삭제 안됨.
 ```
 terraform destroy -auto-approve
 aws ec2 delete-key-pair --key-name mykey
-
 ```

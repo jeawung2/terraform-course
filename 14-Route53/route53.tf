@@ -1,23 +1,23 @@
-resource "aws_route53_zone" "newtech-academy" {
-   name = "newtech.academy"
+resource "aws_route53_zone" "finfra-com" {
+   name = "finfra.com"
 }
 resource "aws_route53_record" "server1-record" {
-   zone_id = aws_route53_zone.newtech-academy.zone_id
-   name = "server1.newtech.academy"
+   zone_id = aws_route53_zone.finfra-com.zone_id
+   name = "server1.finfra.com"
    type = "A"
    ttl = "300"
-   records = ["104.236.247.8"]
+   records = ["123.123.123.123"]
 }
 resource "aws_route53_record" "www-record" {
-   zone_id = aws_route53_zone.newtech-academy.zone_id
-   name = "www.newtech.academy"
+   zone_id = aws_route53_zone.finfra-com.zone_id
+   name = "www.finfra.com"
    type = "A"
    ttl = "300"
-   records = ["104.236.247.8"]
+   records = ["123.123.123.123"]
 }
 resource "aws_route53_record" "mail1-record" {
-   zone_id = aws_route53_zone.newtech-academy.zone_id
-   name = "newtech.academy"
+   zone_id = aws_route53_zone.finfra-com.zone_id
+   name = "finfra.com"
    type = "MX"
    ttl = "300"
    records = [
@@ -30,5 +30,5 @@ resource "aws_route53_record" "mail1-record" {
 }
 
 output "ns-servers" {
-   value = aws_route53_zone.newtech-academy.name_servers
+   value = aws_route53_zone.finfra-com.name_servers
 }
