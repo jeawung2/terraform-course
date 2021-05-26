@@ -19,19 +19,31 @@ cd terraform-course/15-RDS
 ```
 terraform init
 terraform apply -auto-approve  -var password=Nowage12gkn
-sudo apt-get install -y mysql-client
 ```
 
 
 3. Instance 생성 확인
 * AWS Console → RDS
 ```
-cat terraform.tfstate|grep public_ip
+#sudo apt-get install -y mysql-client
+
 cat terraform.tfstate |grep endpoint
-mysql -uroot -h <ip> -pNowage12gkn
+mysql -uroot -h <url> -pNowage12gkn
   show databases;
   exit
 ssh -i ~/mykey ubuntu@<ip> hostname
+```
+
+* cf) Mysql Exmaple
+```
+show databases
+use mydb
+create table mytable(id int primary key,name varchar(20));
+show tables;
+insert into mytable values(1,'aa');
+select * from mytable;
+drop table mytable;
+show tables;
 ```
 
 4. destroy
