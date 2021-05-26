@@ -1,4 +1,50 @@
-# Terraform AWS RDS Example
+# Info
+* RDS 구현 예(Mysql 사용)
+* PowerUser가 아닐 경우 IAM에서 AmazonRDSFullAccess,WorkLinkServiceRolePolicy 줄 것.
+
+# 실행 절차
+1. 폴더로 이동
+```
+cd terraform-course/15-RDS
+```
+
+2. init 및 apply
+* 생성 6분,삭제 8분 정도 걸림[Snapshot생성]
+* * 주의
+  - password는 DB의 비번인데 8자이상이며 대문자와 숫자 포함해야 함.
+  - terraform Apply 시 Parameter groups 혹은 Option Group 삭제 Error시 Aws Console의 RDS Service에서 제거
+  - Parameter groups 혹은 Option Group 삭제 Error시 Aws Service RDS UI에서 Snapshots 제거
+  - 삭제시 시간 갭이 있음. 빨리 하고 싶으면 다른 Region에서 실행 할 것.
+
+```
+terraform init
+terraform apply -auto-approve  -var password=Nowage12gkn
+sudo apt-get install -y mysql-client
+```
+
+
+3. Instance 생성 확인
+* AWS Console → RDS
+```
+cat terraform.tfstate|grep public_ip
+cat terraform.tfstate |grep endpoint
+mysql -uroot -h <ip> -pNowage12gkn
+  show databases;
+  exit
+ssh -i ~/mykey ubuntu@<ip> hostname
+```
+
+4. destroy
+```
+terraform destroy -auto-approve -var password=Nowage12gkn
+```
+
+
+
+
+
+
+# Info about Terraform AWS RDS Example
 
 This folder contains a simple Terraform module that deploys a database instance (MySQL by default) in [AWS](https://aws.amazon.com/)
 to demonstrate how you can use Terratest to write automated tests for your AWS Terraform code. This module deploys an [RDS
@@ -14,34 +60,3 @@ implications.
 **WARNING**: This module and the automated tests for it deploy real resources into your AWS account which can cost you
 money. The resources are all part of the [AWS Free Tier](https://aws.amazon.com/rds/free/), so if you haven't used that up,
 it should be free, but you are completely responsible for all AWS charges.
-
-
-
-
-
-## Running this module manually
-
-1. Sign up for [AWS](https://aws.amazon.com/).
-1. Configure your AWS credentials using one of the [supported methods for AWS CLI
-   tools](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), such as setting the
-   `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables. If you're using the `~/.aws/config` file for profiles then export `AWS_SDK_LOAD_CONFIG` as "True".
-1. Set the AWS region you want to use as the environment variable `AWS_DEFAULT_REGION`.
-1. Install [Terraform](https://www.terraform.io/) and make sure it's on your `PATH`.
-1. Run `terraform init`.
-1. Run `terraform apply`.
-1. When you're done, run `terraform destroy`.
-
-
-
-
-## Running automated tests against this module
-
-1. Sign up for [AWS](https://aws.amazon.com/).
-1. Configure your AWS credentials using one of the [supported methods for AWS CLI
-   tools](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), such as setting the
-   `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables. If you're using the `~/.aws/config` file for profiles then export `AWS_SDK_LOAD_CONFIG` as "True".
-1. Install [Terraform](https://www.terraform.io/) and make sure it's on your `PATH`.
-1. Install [Golang](https://golang.org/) and make sure this code is checked out into your `GOPATH`.
-1. `cd test`
-1. `dep ensure`
-1. `go test -v -run TestTerraformAwsRdsExample`
