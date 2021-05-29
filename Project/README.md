@@ -4,7 +4,7 @@
 # 실행 절차
 1. 폴더로 이동
 ```
-cd terraform-course/19-AutoscalingWithELB
+cd terraform-course/Project
 ```
 
 2. init 및 apply
@@ -45,3 +45,7 @@ terraform destroy -auto-approve
 aws ec2 delete-key-pair --key-name prjkey
 
 ```
+
+
+# ToDo
+* Security Group이 현재는 모두 열려 있는 상태, zone별로 통신 가능하게 할 것. 
