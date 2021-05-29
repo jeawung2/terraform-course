@@ -35,12 +35,11 @@ resource "aws_iam_role_policy" "s3-mybucket-role-policy" {
               "s3:*"
             ],
             "Resource": [
-              "arn:aws:s3:::mybucket-nb1234",
-              "arn:aws:s3:::mybucket-nb1234/*"
+              "arn:aws:s3:::mybucket-jg11",
+              "arn:aws:s3:::mybucket-jg11/*"
             ]
         }
     ]
 }
 EOF
 }
-
