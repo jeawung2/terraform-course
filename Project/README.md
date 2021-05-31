@@ -1,53 +1,85 @@
-# Info
-* AWS기반 Terraform을 이용한 인프라스트럭처 프로비저닝 : 향후 Project에 사용할 Instance등을 만듦
-* ELB를 구현하고 Load Balancer가 작동하는지 확인하는 예
+# Kubernetes Install With Kubespray
 
-# 실행 절차
-1. Key 생성 및 폴더로 이동
+1. Hosts파일 셋팅
+```
+ec2IdsAndName=$(aws ec2 describe-instances     --filters Name=instance-state-name,Values=running     --query 'Reservations[*].Instances[].[InstanceId, Tags[?Key==`Name`]]' --output text|sed -z  "s/\\nName[[:blank:]]/,/g")
+for i in $ec2IdsAndName; do
+	  ec2id=$(echo $i|awk 'BEGIN{FS=","}{printf $1}')
+	  ec2Name=$(echo $i|awk 'BEGIN{FS=","}{printf $2}')
+    ip=$(aws ec2 describe-instances --instance-ids $ec2id --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+    echo  $ip  $ec2Name
+    sudo bash -c "echo  $ip  $ec2Name  >> /etc/hosts"
+
+done
+```
+* cf) 아래와 같이 /etc/hosts파일 셋팅 해도 됨
+```
+52.213.183.141 vm01
+54.75.118.15   vm02
+54.75.118.154  vm03
+```
+
+2. git Clone
+```
+cd
+git clone https://github.com/kubernetes-sigs/kubespray
+```
+
+3. OS key 생성 [있으면 생략]
 ```
 ssh-keygen -f ~/.ssh/id_rsa -N ''
-cd terraform-course/Project
+```
+* cf) 설치 대상 host에 Public-key 배포
+    ssh-copy-id root@10.0.2.10
+
+3. git clone 및 inventory파일 생성
+```
+cd kubespray
+cat > inventory/inventory.ini  <<EOF
+[all]
+vm01 etcd_member_name=etcd1
+vm02 etcd_member_name=etcd2
+vm03 etcd_member_name=etcd3
+
+[kube-master]
+vm01
+vm02
+
+[etcd]
+vm01
+vm02
+vm03
+
+[kube-node]
+vm01
+vm02
+vm03
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
+EOF
 ```
 
-2. init 및 apply
+4. kubesparyInstall.sh 실행
 ```
-terraform init
-terraform apply -auto-approve
+ wget https://gist.githubusercontent.com/nowage/a169b11372bf6a708bcb475d606471e2/raw/daa0fef590005ed5a70641e996c3c7f5a1a81972/k8sInstallByKubesray.sh
+bash k8sInstallByKubesray.sh
 ```
-
-
-3. ELB 작동 여부와 Instance 확인
+* ==
 ```
-# ELB 작동여부 확인
-dns_names=$(cat terraform.tfstate|grep dns_name|awk 'BEGIN{FS="\""}{print$4}')
-for dns_name in $dns_names; do
-    echo $dns_name --------------------
-    curl $dns_name
-    curl $dns_name
-    curl $dns_name
-done
+if [ ! -f requirements.txt ]; then
+    echo "go to kubespray install folder"
+else
+    sudo pip3 install -r requirements.txt
+    sudo pip3  install ansible netaddr jinja2
 
+    #declare -a IPS=$(cat /etc/hosts|grep vm|awk '{printf $1 " "}')
+    #CONFIG_FILE=inventory/host.yaml python3 ./contrib/aws_inventory/kubespray-aws-inventory.py ${IPS[@]}
 
-# Instance Name과 InstanceId 확인
-aws ec2 describe-instances     --filters Name=instance-state-name,Values=running     --query 'Reservations[*].Instances[].[InstanceId, Tags[?Key==`Name`]]' --output text
-
-# 각 Instance 작동 확인
-ec2Ids=$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" --query "Reservations[].Instances[].InstanceId" --output text)
-for i in $ec2Ids; do
-  echo Instance Id : $i
-  ip=$(aws ec2 describe-instances --instance-ids $i --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-  echo "ssh ubuntu@$ip hostname"
-  ssh ubuntu@$ip hostname
-done
+    ansible-playbook --flush-cache -u ubuntu -b --become --become-user=root \
+      -i inventory/inventory.ini  \
+      cluster.yml
+fi
 ```
-
-4. destroy
-```
-terraform destroy -auto-approve
-aws ec2 delete-key-pair --key-name prjkey
-
-```
-
-
-# ToDo
-* Security Group이 현재는 모두 열려 있는 상태, zone별로 통신 가능하게 할 것.

@@ -20,7 +20,7 @@ variable "AMIS" {
     ap-northeast-2 = "ami-00edfb46b107f643c"
     us-east-1      = "ami-085925f297f89fce1"
   }
-} 
+}
 
 
 variable "instance_count" {

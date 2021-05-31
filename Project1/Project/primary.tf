@@ -1,7 +1,7 @@
 resource "aws_launch_configuration" "primary-launchconfig" {
   name_prefix          = "primary-launchconfig"
   image_id             = lookup(var.AMIS, var.AWS_REGION)
-  instance_type        = "t2.micro"
+  instance_type        = "t2.medium"
   key_name             = aws_key_pair.prjkey.key_name
   security_groups      = [aws_security_group.primary-securitygroup.id]
   user_data            = "#!/bin/bash\napt-get update\napt-get -y install nginx net-tools stress\nMYIP=`ifconfig | grep 'inet '|grep 'broadcast' | awk '{ print $2 }'`\necho 'Primary is: '$MYIP > /var/www/html/index.html;/tmp/script.sh"
