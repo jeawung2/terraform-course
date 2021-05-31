@@ -37,7 +37,7 @@ for i in $ec2Ids; do
   echo Instance Id : $i
   ip=$(aws ec2 describe-instances --instance-ids $i --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
   echo "ssh ubuntu@$ip hostname"
-  ssh -i ~/mykey ubuntu@$ip hostname
+  ssh ubuntu@$ip hostname
 done
 ```
 
