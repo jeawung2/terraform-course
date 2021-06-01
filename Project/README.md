@@ -83,3 +83,14 @@ else
       cluster.yml
 fi
 ```
+
+# Admin
+## Shutdown All Instance
+```
+for i in $(seq 3); do ssh vm0$i sudo sh -c 'shutdown -h now'; done
+```
+## Startup all Instance
+```
+ids=$(aws ec2 describe-instances  --filters "Name=tag-value,Values=vm0*" --query "Reservations[].Instances[].InstanceId" --output text)
+for i in $ids; do     aws ec2 start-instances --instance-ids $i ;done
+```
