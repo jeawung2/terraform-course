@@ -2,17 +2,10 @@
 
 1. Hosts파일 셋팅
 ```
-ec2IdsAndName=$(aws ec2 describe-instances     --filters Name=instance-state-name,Values=running     --query 'Reservations[*].Instances[].[InstanceId, Tags[?Key==`Name`]]' --output text|sed -z  "s/\\nName[[:blank:]]/,/g")
-for i in $ec2IdsAndName; do
-	  ec2id=$(echo $i|awk 'BEGIN{FS=","}{printf $1}')
-	  ec2Name=$(echo $i|awk 'BEGIN{FS=","}{printf $2}')
-    ip=$(aws ec2 describe-instances --instance-ids $ec2id --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-    echo  $ip  $ec2Name
-    sudo bash -c "echo  $ip  $ec2Name  >> /etc/hosts"
-
-done
+./doSetHosts.sh
 ```
-* cf) 아래와 같이 /etc/hosts파일 셋팅 해도 됨
+
+* cf) 아래와 같이 /etc/hosts파일을 직접 셋팅 해도 됨
 ```
 52.213.183.141 vm01
 54.75.118.15   vm02
