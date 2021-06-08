@@ -7,4 +7,6 @@ done
 
 # install nginx
 apt-get update
-apt-get -y install nginx
+apt-get -y install net-tools
+
+echo "sudo -i" >> /home/ubuntu/.bashrc
