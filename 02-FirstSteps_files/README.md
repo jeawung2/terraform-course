@@ -22,8 +22,7 @@ bash keySetting.sh
 ```
 cf) 다시 로그인해도 적용되게 하기.
 ```
-cd
-cat keySetting.sh >> .bashrc
+cat keySetting.sh >> ~/.bashrc
 ```
 
 3. init
