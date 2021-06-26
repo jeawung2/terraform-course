@@ -62,7 +62,7 @@ bash k8sInstallByKubesray.sh
 ```
 * ==
 ```
-cat > k8sInstallByKubesray.sh <<EOF
+cat > k8sInstallByKubespray.sh <<EOF
 if [ ! -f requirements.txt ]; then
     echo "go to kubespray install folder"
 else
