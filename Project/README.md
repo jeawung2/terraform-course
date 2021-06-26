@@ -73,7 +73,7 @@ else
       cluster.yml
 fi
 EOF
-bash k8sInstallByKuberspray.sh
+bash k8sInstallByKubespray.sh
 ```
 
 # Admin
