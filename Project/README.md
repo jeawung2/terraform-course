@@ -28,7 +28,7 @@ ssh-keygen -f ~/.ssh/id_rsa -N ''
 4. inventory파일 생성
 ```
 cd kubespray
-cat > inventory/inventory.ini  <<EOF
+cat > inventory/inventory.ini <EOF
 [all]
 vm01 etcd_member_name=etcd1
 vm02 etcd_member_name=etcd2
@@ -57,7 +57,7 @@ EOF
 
 5. kubesparyInstall.sh 실행
 ```
- wget https://gist.githubusercontent.com/nowage/a169b11372bf6a708bcb475d606471e2/raw/daa0fef590005ed5a70641e996c3c7f5a1a81972/k8sInstallByKubesray.sh
+wget https://gist.githubusercontent.com/nowage/a169b11372bf6a708bcb475d606471e2/raw/daa0fef590005ed5a70641e996c3c7f5a1a81972/k8sInstallByKubesray.sh
 bash k8sInstallByKubesray.sh
 ```
 * ==
