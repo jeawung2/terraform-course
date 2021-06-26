@@ -58,7 +58,7 @@ EOF
 5. kubesparyInstall.sh 실행
 ```
 wget https://gist.githubusercontent.com/nowage/a169b11372bf6a708bcb475d606471e2/raw/daa0fef590005ed5a70641e996c3c7f5a1a81972/k8sInstallByKubesray.sh
-bash k8sInstallByKubesray.sh
+bash k8sInstallByKubespray.sh
 ```
 * ==
 ```
