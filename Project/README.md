@@ -58,7 +58,7 @@ EOF
 5. kubesparyInstall.sh 실행
 ```
 wget https://gist.githubusercontent.com/nowage/a169b11372bf6a708bcb475d606471e2/raw/daa0fef590005ed5a70641e996c3c7f5a1a81972/k8sInstallByKubesray.sh
-bash k8sInstallByKubespray.sh
+bash k8sInstallByKubesray.sh.sh
 ```
 * ==
 ```
@@ -69,7 +69,7 @@ else
     sudo pip3 install -r requirements.txt
     sudo pip3  install ansible netaddr jinja2
     ansible-playbook --flush-cache -u ubuntu -b --become --become-user=root \
-      -i inventory/inventory.ini  \
+      -i inventory/inventory.ini \
       cluster.yml
 fi
 EOF
