@@ -28,7 +28,7 @@ ssh-keygen -f ~/.ssh/id_rsa -N ''
 4. inventory파일 생성
 ```
 cd kubespray
-cat > inventory/inventory.ini <EOF
+cat > inventory/inventory.ini << EOF
 [all]
 vm01 etcd_member_name=etcd1
 vm02 etcd_member_name=etcd2
