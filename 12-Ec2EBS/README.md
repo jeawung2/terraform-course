@@ -33,7 +33,7 @@ df
 ls /dev|grep xvd
 sudo -i
 fdisk /dev/xvdh
-    # < 설정 > : n → p → <enter> → <enter> → p → w
+    # < 설정 > : n → p → <enter> → <enter>  → <enter> → p → w
 
 mkfs.ext4  /dev/xvdh1
 mkdir /data1
