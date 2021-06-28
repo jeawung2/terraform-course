@@ -16,10 +16,11 @@ terraform apply -auto-approve
 
 3. ELB 확인
 * 코드에서 바뀐점.
+```
   "aws_autoscaling_group" "example-autoscaling" →  health_check_type = "ELB"
       load_balancers = ["${aws_elb.my-elb.name}"]
   "aws_launch_configuration" "example-launchconfig" → user_data, lifecycle
-
+```
 * 확인 예
   - Aws Console의 Ec2 instance에서 해당 Instance의 ip 혹은 url 확인
 ```
