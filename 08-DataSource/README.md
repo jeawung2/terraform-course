@@ -12,7 +12,7 @@ cd terraform-course/08-DataSource
 
 2. 현재 'from_eu_west'라는  Security Groups이 없다는 것을 확인
 ```
-aws ec2 delete-security-group --group-id from_eu_west
+aws ec2 delete-security-group --group-name from_eu_west
 ```
 
 
@@ -26,7 +26,7 @@ terraform apply -auto-approve
 4. 'from_eu_west'라는  Security Groups이 생성 되었음을 확인
 * EC2 console의 Security Groups의 Inbound 셋팅에서도 확인 가능.
 ```
-aws ec2 delete-security-group --group-id from_eu_west
+aws ec2 delete-security-group --group-name from_eu_west
 ```
 
 6. destroy
