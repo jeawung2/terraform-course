@@ -1,5 +1,10 @@
 # Kubernetes Install With Kubespray
 
+0. Terraform으로 host 셋팅
+```
+terraform apply -auto-aprove
+```
+
 1. Hosts파일 셋팅
 ```
 bash doSetHosts.sh
