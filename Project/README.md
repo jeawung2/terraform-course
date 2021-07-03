@@ -1,11 +1,19 @@
 # Kubernetes Install With Kubespray
 
-0. Terraform으로 host 셋팅
+0. OS key 생성 [있으면 생략]
+```
+ssh-keygen -f ~/.ssh/id_rsa -N ''
+```
+* cf) 설치 대상 host에 Public-key 배포
+    ssh-copy-id root@10.0.2.10
+
+
+1. Terraform으로 host 셋팅
 ```
 terraform apply -auto-aprove
 ```
 
-1. Hosts파일 셋팅
+2. Hosts파일 셋팅
 ```
 bash doSetHosts.sh
 ```
@@ -17,18 +25,11 @@ bash doSetHosts.sh
 54.75.118.154  vm03
 ```
 
-2. git Clone
+3. git Clone
 ```
 cd
 git clone https://github.com/kubernetes-sigs/kubespray
 ```
-
-3. OS key 생성 [있으면 생략]
-```
-ssh-keygen -f ~/.ssh/id_rsa -N ''
-```
-* cf) 설치 대상 host에 Public-key 배포
-    ssh-copy-id root@10.0.2.10
 
 4. inventory파일 생성
 ```
