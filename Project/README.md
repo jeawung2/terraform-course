@@ -49,6 +49,9 @@ vm01
 vm02
 vm03
 
+[helm]
+vm01
+
 [kube-node]
 vm01
 vm02
