@@ -59,6 +59,10 @@ kube-master
 kube-node
 
 EOF
+
+cat ./inventory/sample/group_vars/k8s_cluster/addons.yml|sed 's/helm_enabled: false/helm_enabled: true/g' >/tmp/addons.yml
+cp /tmp/addons.yml ./inventory/sample/group_vars/k8s_cluster/addons.yml
+
 ```
 
 5. kubesparyInstall.sh 실행
