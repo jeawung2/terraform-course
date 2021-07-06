@@ -6,7 +6,8 @@ until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
 done
 
 # install nginx
-apt-get update
-apt-get -y install net-tools
+apt -y update
+apt -y install net-tools
+apt -y install nfs-common
 
 echo "sudo -i" >> /home/ubuntu/.bashrc
