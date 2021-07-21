@@ -6,6 +6,16 @@
 * terraform.tfvars  사용시, 보안을 위해 terraform.tfvars를  .gitignore에 포함 시킬 것.
 
 # 실행 절차
+0. 변수 셋팅 파일 생성 후 실행
+```
+vi ~/.bashrc
+#export TF_VAR_AWS_ACCESS_KEY="xxxxxxx"
+#export TF_VAR_AWS_SECRET_KEY="xxxxxxxxxxxxxxx"
+#export TF_VAR_AWS_REGION="eu-west-1"
+
+bash ~/.bashrc
+```
+
 1. 해당 폴더로 이동
 ```
 cd terraform-course/02-FirstSteps_files
