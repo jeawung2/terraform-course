@@ -18,6 +18,9 @@ resource "aws_instance" "example" {
   ami           = "ami-03746875d916becc0"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.mykey.key_name
+  root_block_device{
+    volume_size   = 100
+  }
 
   connection {
     user        = "ubuntu"
