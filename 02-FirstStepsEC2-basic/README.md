@@ -57,9 +57,12 @@ terraform apply -auto-approve
 
 5. Instance 생성 확인
 
-6. ssh -i mykey ubuntu@13.125.224.209    <- IP는 생성된 Instacne IP임.
+6.
+  cp mykey ~/
+  chmod 400 ~/mykey
+  ssh -i mykey ubuntu@13.125.224.209    <- IP는 생성된 Instacne IP임.
 
-7. destroy
+8. destroy
 ```
 terraform destroy
 ```
