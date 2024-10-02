@@ -52,7 +52,7 @@ terraform init
 
 4. apply : 중간에 Yes입력
 ```
-terraform apply
+terraform apply -auto-approve
 ```
 
 5. Instance 생성 확인
