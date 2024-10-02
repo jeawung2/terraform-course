@@ -21,6 +21,10 @@ bash ~/.bashrc
 cd terraform-course/02-FirstSteps_files
 cp -r ../.terraform ./       # 필수 아님
 ```
+
+
+
+
 2. 변수 셋팅 파일 생성 후 실행
 ```
 vi ~/keySetting.sh
@@ -34,7 +38,13 @@ cf) 다시 로그인해도 적용되게 하기.
 ```
 cat keySetting.sh >> ~/.bashrc
 ```
-
+2.1 
+ssh-keygen -f mykey
+cat terraform.tfvars
+  AWS_ACCESS_KEY="....."
+  AWS_SECRET_KEY="........."
+  AWS_RESION="ap-northease-2"
+  
 3. init
 ```
 terraform init
